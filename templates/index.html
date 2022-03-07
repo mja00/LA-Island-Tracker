@@ -27,9 +27,10 @@
                                             {% if island.maxroll_link and island.mokoko_count > 0 %}
                                                 <a id="mokoko-link-{{ island.id }}"
                                                    href="{{ island.maxroll_link }}#mokokos-8c643f20-12ec-4f5e-8b19-c26b12540251"
-                                                   target="_blank">
+                                                   target="_blank"
+                                                   class="text-decoration-none">
                                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>{% endif %}
-                                            Mokoko Seeds: {{ island.mokoko_count }}
+                                            <label style="pointer-events: none;" id="label-mokoko-checkbox-{{ island.id }}" for="mokoko-checkbox-{{ island.id }}">Mokoko Seeds: {{ island.mokoko_count }}</label>
                                             {% if island.maxroll_link and island.mokoko_count > 0 %}</a>{% endif %}
                                             <input data-toggle="tooltip" data-placement="right"
                                                    title="Mark Mokoko Completed" id="mokoko-checkbox-{{ island.id }}"
@@ -38,8 +39,10 @@
                                         <li id="island-quests-{{ island.id }}">
                                             <a id="island-quests-link-{{ island.id }}"
                                                href="{{ island.maxroll_link }}#island-quests-and-rewards-2a7afe14-341f-4184-87c0-53d0abaecc2e"
-                                               target="_blank">
-                                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Island Quests
+                                               target="_blank"
+                                               class="text-decoration-none">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                <label style="pointer-events: none;" id="label-quest-checkbox-{{ island.id }}" for="quest-checkbox-{{ island.id }}">Island Quests</label>
                                             </a>
                                             <input data-toggle="tooltip" data-placement="right"
                                                    title="Mark Quests Completed" id="quest-checkbox-{{ island.id }}"
@@ -49,9 +52,10 @@
                                             <li id="token-{{ island.id }}">
                                                 <a id="token-link-{{ island.id }}"
                                                    href="{{ island.maxroll_link }}#island-heart-details-3c2cad9c-b14d-4baf-8437-92a53317e35c-2"
-                                                   target="_blank">
+                                                   target="_blank"
+                                                   class="text-decoration-none">
                                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                                    Has island token
+                                                    <label style="pointer-events: none;" id="label-token-checkbox-{{ island.id }}" for="token-checkbox-{{ island.id }}">Has island token</label>
                                                 </a>
                                                 <input data-toggle="tooltip" data-placement="right"
                                                        title="Mark Token Completed" id="token-checkbox-{{ island.id }}"

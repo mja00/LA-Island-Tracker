@@ -168,10 +168,13 @@ function interestedIsland(islandId) {
 
 function strikeQuestText(islandId, striked) {
     let questText = $(`#island-quests-${islandId}`);
+    let questTextLabel = $(`#label-quest-checkbox-${islandId}`);
     if (striked) {
         questText.addClass('striked');
+        questTextLabel.addClass('striked');
     } else {
         questText.removeClass('striked');
+        questTextLabel.removeClass('striked');
     }
 }
 
@@ -197,10 +200,13 @@ function onQuestCheck(islandId) {
 
 function strikeMokokoText(islandId, striked) {
     let mokokoText = $(`#mokoko-${islandId}`);
+    let mokokoTextLabel = $(`#label-mokoko-checkbox-${islandId}`);
     if (striked) {
         mokokoText.addClass('striked');
+        mokokoTextLabel.addClass('striked');
     } else {
         mokokoText.removeClass('striked');
+        mokokoTextLabel.removeClass('striked');
     }
 }
 
@@ -226,10 +232,13 @@ function onMokokoCheck(islandId) {
 
 function strikeTokenText(islandId, striked) {
     let tokenText = $(`#token-${islandId}`);
+    let tokenTextLabel = $(`#label-token-checkbox-${islandId}`);
     if (striked) {
         tokenText.addClass('striked');
+        tokenTextLabel.addClass('striked');
     } else {
         tokenText.removeClass('striked');
+        tokenTextLabel.removeClass('striked');
     }
 }
 
