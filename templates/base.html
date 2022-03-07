@@ -12,6 +12,19 @@
                 <meta name="robots" content="index, follow">
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
                 <meta name="language" content="English">
+                <!-- Open Graph / Facebook -->
+                <meta property="og:type" content="website">
+                <meta property="og:url" content="https://lost-ark.theairplan.com/">
+                <meta property="og:title" content="Lost Ark Island Tracker">
+                <meta property="og:description" content="Ever wanted to track what islands you've been to in Lost Ark? Look no further!">
+                <meta property="og:image" content="{{ url_for('static', filename='images/mokoko-seed.jpg', _external=True) }}">
+
+                <!-- Twitter -->
+                <meta property="twitter:card" content="summary_large_image">
+                <meta property="twitter:url" content="https://lost-ark.theairplan.com/">
+                <meta property="twitter:title" content="Lost Ark Island Tracker">
+                <meta property="twitter:description" content="Ever wanted to track what islands you've been to in Lost Ark? Look no further!">
+                <meta property="twitter:image" content="{{ url_for('static', filename='images/mokoko-seed.jpg', _external=True) }}">
 
             {%- endblock metas %}
 
