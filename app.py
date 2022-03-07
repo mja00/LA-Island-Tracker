@@ -37,5 +37,25 @@ def island_info(island_type):
     return render_template("index.html", islands=island_list)
 
 
+@app.route('/islands/tier/<tier>')
+def island_tier(tier):
+    # Get the islands with the specified tier
+    try:
+        island_list = [i for i in islands if i['tier'] == int(tier)]
+    except KeyError:
+        island_list = []
+    return render_template("index.html", islands=island_list)
+
+
+@app.route('/islands/ilvl/<ilvl>')
+def island_ilvl(ilvl):
+    # Get the islands with an ilvl equal to or higher than the specified ilvl
+    try:
+        island_list = [i for i in islands if i['ilvl'] >= int(ilvl)]
+    except KeyError:
+        island_list = []
+    return render_template("index.html", islands=island_list)
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
+{% block userstyles %}
+    <style>
+        .striked {
+            text-decoration: line-through;
+        }
+    </style>
+{% endblock %}
 {% block content %}
     <div class="container-fluid mt-2">
         {% for island_row in islands | batch(4, None) %}
@@ -13,63 +20,85 @@
                                 </h5>
                                 <div class="card-body">
                                     <p class="card-text">
-                                        Tier {{ island.tier }} - Item Level {{ island.ilvl }}<br>
-                                        {% if island.maxroll_link and island.mokoko_count > 0 %}<a id="mokoko-link-{{ island.id }}" href="{{ island.maxroll_link }}#mokokos-8c643f20-12ec-4f5e-8b19-c26b12540251" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i>{% endif %}
-                                                Mokoko Seeds: {{ island.mokoko_count }}
-                                        {% if island.maxroll_link and island.mokoko_count > 0 %}</a>{% endif %}
-                                        <br>
-                                        {% if not island.no_content %}
-                                        Island's contents:
-                                        {% else %}
-                                            This island has no content.
-                                        {% endif %}
-                                        {% if island.adventure_island %}
-                                            <i style="color: orange;" data-toggle="tooltip" data-placement="top"
-                                               title="Adventure Island"
-                                               class="fa-solid fa-dungeon"></i>
-                                        {% endif %}
-                                        {% if island.pvp_enabled %}
-                                            <i style="color: darkred;" data-toggle="tooltip" data-placement="top"
-                                               title="PvP Enabled" class="fa-solid fa-shield"></i>
-                                        {% endif %}
-                                        {% if island.pirate_coin %}
-                                            <i style="color: goldenrod;" data-toggle="tooltip" data-placement="top"
-                                               title="Pirate Coins" class="fa-solid fa-coins"></i>
-                                        {% endif %}
-                                        {% if island.honing_materials %}
-                                            <i style="color: lightblue;" data-toggle="tooltip" data-placement="top"
-                                               title="Honing Materials" class="fa-solid fa-gem"></i>
-                                        {% endif %}
-                                        {% if island.engraving_island %}
-                                            <i style="color: green;" data-toggle="tooltip" data-placement="top"
-                                               title="Engravings" class="fa-solid fa-book"></i>
-                                        {% endif %}
-                                        {% if island.timed_island %}
-                                            <i style="color: purple;" data-toggle="tooltip" data-placement="top"
-                                               title="Timed Island" class="fa-solid fa-stopwatch"></i>
-                                        {% endif %}
-                                        {% if island.una_task %}
-                                            <i style="color: slateblue;" data-toggle="tooltip" data-placement="top"
-                                               title="Una's Tasks" class="fa-solid fa-list-check"></i>
-                                        {% endif %}
-                                        {% if island.rapport %}
-                                            <i style="color: deeppink;" data-toggle="tooltip" data-placement="top"
-                                               title="Rapport Island" class="fa-solid fa-heart"></i>
-                                        {% endif %}
-                                        <br>
-                                        <div class="btn-group" role="group" aria-label="Buttons">
-                                            {% if island.maxroll_link %}
+                                    <ul class="list-unstyled">
+                                        <li id="tier-{{ island.id }}">Tier {{ island.tier }} -
+                                            Item Level {{ island.ilvl }}</li>
+                                        <li id="mokoko-{{ island.id }}">
+                                            {% if island.maxroll_link and island.mokoko_count > 0 %}
+                                                <a id="mokoko-link-{{ island.id }}"
+                                                   href="{{ island.maxroll_link }}#mokokos-8c643f20-12ec-4f5e-8b19-c26b12540251"
+                                                   target="_blank">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>{% endif %}
+                                            Mokoko Seeds: {{ island.mokoko_count }}
+                                            {% if island.maxroll_link and island.mokoko_count > 0 %}</a>{% endif %}
+                                        </li>
+                                        <li id="island-quests-{{ island.id }}">
+                                            <a id="island-quests-link-{{ island.id }}" href="{{ island.maxroll_link }}#island-quests-and-rewards-2a7afe14-341f-4184-87c0-53d0abaecc2e" target="_blank">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Island Quests
+                                            </a>
+                                        </li>
+                                        <li id="island-contents-{{ island.id }}">
+                                            {% if not island.no_content %}
+                                                Island's contents:
+                                            {% else %}
+                                                This island has no content.
+                                            {% endif %}
+                                            {% if island.adventure_island %}
+                                                <i style="color: orange;" data-toggle="tooltip" data-placement="top"
+                                                   title="Adventure Island"
+                                                   class="fa-solid fa-dungeon"></i>
+                                            {% endif %}
+                                            {% if island.pvp_enabled %}
+                                                <i style="color: darkred;" data-toggle="tooltip" data-placement="top"
+                                                   title="PvP Enabled" class="fa-solid fa-shield"></i>
+                                            {% endif %}
+                                            {% if island.pirate_coin %}
+                                                <i style="color: goldenrod;" data-toggle="tooltip" data-placement="top"
+                                                   title="Pirate Coins" class="fa-solid fa-coins"></i>
+                                            {% endif %}
+                                            {% if island.honing_materials %}
+                                                <i style="color: lightblue;" data-toggle="tooltip" data-placement="top"
+                                                   title="Honing Materials" class="fa-solid fa-gem"></i>
+                                            {% endif %}
+                                            {% if island.engraving_island %}
+                                                <i style="color: green;" data-toggle="tooltip" data-placement="top"
+                                                   title="Engravings" class="fa-solid fa-book"></i>
+                                            {% endif %}
+                                            {% if island.timed_island %}
+                                                <i style="color: purple;" data-toggle="tooltip" data-placement="top"
+                                                   title="Timed Island" class="fa-solid fa-stopwatch"></i>
+                                            {% endif %}
+                                            {% if island.una_task %}
+                                                <i style="color: slateblue;" data-toggle="tooltip" data-placement="top"
+                                                   title="Una's Tasks" class="fa-solid fa-list-check"></i>
+                                            {% endif %}
+                                            {% if island.rapport %}
+                                                <i style="color: deeppink;" data-toggle="tooltip" data-placement="top"
+                                                   title="Rapport Island" class="fa-solid fa-heart"></i>
+                                            {% endif %}
+                                            {% if island.token %}
+                                                <img data-toggle="tooltip" data-placement="top"
+                                                     title="Island Token"
+                                                     src="{{ url_for('static', filename='images/island_token.png') }}"
+                                                     style="width: 24px; height: 24px; background: linear-gradient(to right bottom,#3b1b08,#a94204);">
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                    <div class="btn-group" role="group" aria-label="Buttons">
+                                        {% if island.maxroll_link %}
                                             <a class="btn btn-primary" href="{{ island.maxroll_link }}" target="_blank">
                                                 Maxroll
                                             </a>
-                                            {% endif %}
-                                            <button id="complete-button-{{ island.id }}" class="btn btn-success" onclick="completeIsland({{ island.id }})">
-                                                Complete
-                                            </button>
-                                            <button id="interested-button-{{ island.id }}" class="btn btn-warning" onclick="interestedIsland({{ island.id }})">
-                                                Interested
-                                            </button>
-                                        </div>
+                                        {% endif %}
+                                        <button id="complete-button-{{ island.id }}" class="btn btn-success"
+                                                onclick="completeIsland({{ island.id }})">
+                                            Complete
+                                        </button>
+                                        <button id="interested-button-{{ island.id }}" class="btn btn-warning"
+                                                onclick="interestedIsland({{ island.id }})">
+                                            Interested
+                                        </button>
+                                    </div>
                                     </p>
                                 </div>
                             </div>

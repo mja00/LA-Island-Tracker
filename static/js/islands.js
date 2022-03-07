@@ -45,6 +45,7 @@ function completeIsland(islandId) {
     let triggeredButton = $(`#complete-button-${islandId}`);
     let islandCard = $(`#island-card-${islandId}`);
     let mokokoLink = $(`#mokoko-link-${islandId}`);
+    let questLink = $(`#island-quests-link-${islandId}`);
     // Store a list of completed islands in the user's session/local storage
     let completedIslands = JSON.parse(localStorage.getItem('completedIslands'));
     if (completedIslands === null) {
@@ -60,6 +61,7 @@ function completeIsland(islandId) {
         completedIslands.push(islandId);
         activateCompletedButton(triggeredButton);
         makeLinkWhite(mokokoLink);
+        makeLinkWhite(questLink);
         // Check if in the interested list
         if (interestedIslands.includes(islandId)) {
             islandCard.removeClass('text-white bg-warning border-warning');
@@ -77,6 +79,7 @@ function completeIsland(islandId) {
         completedIslands = removeFromList(completedIslands, islandId);
         resetCompletedButton(triggeredButton);
         resetLink(mokokoLink);
+        resetLink(questLink);
         islandCard.removeClass('text-white bg-success border-success');
         islandCard.addClass('border-danger');
         // Make sure the interested button is visible
@@ -90,6 +93,7 @@ function interestedIsland(islandId) {
     let triggeredButton = $(`#interested-button-${islandId}`);
     let islandCard = $(`#island-card-${islandId}`);
     let mokokoLink = $(`#mokoko-link-${islandId}`);
+    let questLink = $(`#island-quests-link-${islandId}`);
     // Store a list of interested islands in the user's session/local storage
     let interestedIslands = JSON.parse(localStorage.getItem('interestedIslands'));
     if (interestedIslands === null) {
@@ -100,6 +104,7 @@ function interestedIsland(islandId) {
         interestedIslands.push(islandId);
         activateInterestedButton(triggeredButton);
         makeLinkWhite(mokokoLink);
+        makeLinkWhite(questLink);
         islandCard.removeClass('border-danger');
         islandCard.addClass('text-white bg-warning border-warning');
     } else {
@@ -109,6 +114,7 @@ function interestedIsland(islandId) {
         });
         resetInterestedButton(triggeredButton, false);
         resetLink(mokokoLink);
+        resetLink(questLink);
         islandCard.removeClass('text-white bg-warning border-warning');
         islandCard.addClass('border-danger');
     }
@@ -126,8 +132,11 @@ $(document).ready(function () {
             let triggeredButton = $(`#complete-button-${islandId}`);
             let interestedButton = $(`#interested-button-${islandId}`);
             let mokokoLink = $(`#mokoko-link-${islandId}`);
+            let questLink = $(`#island-quests-link-${islandId}`);
+
             activateCompletedButton(triggeredButton);
             makeLinkWhite(mokokoLink);
+            makeLinkWhite(questLink);
             // Hide the interested button
             interestedButton.hide();
             islandCard.removeClass('border-danger');
@@ -136,11 +145,15 @@ $(document).ready(function () {
     }
     if (interestedIslands !== null) {
         interestedIslands.forEach(function (islandId) {
+            // Vars
             let islandCard = $(`#island-card-${islandId}`);
             let triggeredButton = $(`#interested-button-${islandId}`);
             let mokokoLink = $(`#mokoko-link-${islandId}`);
+            let questLink = $(`#island-quests-link-${islandId}`);
+
             activateInterestedButton(triggeredButton);
             makeLinkWhite(mokokoLink);
+            makeLinkWhite(questLink);
             islandCard.removeClass('border-danger');
             islandCard.addClass('text-white bg-warning border-warning');
         });

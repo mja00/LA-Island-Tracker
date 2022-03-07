@@ -7,6 +7,7 @@
       "ilvl": 250,
       "maxroll_link": "https://lost-ark.maxroll.gg/island/aiwana-island",
       "mokoko_count": 3,
+      "token": true,
       "adventure_island": false,
       "pvp_enabled": false,
       "pirate_coin": false,
