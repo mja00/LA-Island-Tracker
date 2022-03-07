@@ -31,12 +31,35 @@
                                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>{% endif %}
                                             Mokoko Seeds: {{ island.mokoko_count }}
                                             {% if island.maxroll_link and island.mokoko_count > 0 %}</a>{% endif %}
+                                            <input data-toggle="tooltip" data-placement="right"
+                                                   title="Mark Mokoko Completed" id="mokoko-checkbox-{{ island.id }}"
+                                                   type="checkbox" onclick="onMokokoCheck({{ island.id }})">
                                         </li>
                                         <li id="island-quests-{{ island.id }}">
-                                            <a id="island-quests-link-{{ island.id }}" href="{{ island.maxroll_link }}#island-quests-and-rewards-2a7afe14-341f-4184-87c0-53d0abaecc2e" target="_blank">
+                                            <a id="island-quests-link-{{ island.id }}"
+                                               href="{{ island.maxroll_link }}#island-quests-and-rewards-2a7afe14-341f-4184-87c0-53d0abaecc2e"
+                                               target="_blank">
                                                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Island Quests
                                             </a>
+                                            <input data-toggle="tooltip" data-placement="right"
+                                                   title="Mark Quests Completed" id="quest-checkbox-{{ island.id }}"
+                                                   type="checkbox" onclick="onQuestCheck({{ island.id }})">
                                         </li>
+                                        {% if island.token %}
+                                            <li id="token-{{ island.id }}">
+                                                <a id="token-link-{{ island.id }}"
+                                                   href="{{ island.maxroll_link }}#island-heart-details-3c2cad9c-b14d-4baf-8437-92a53317e35c-2"
+                                                   target="_blank">
+                                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                    Has island token
+                                                </a>
+                                                <input data-toggle="tooltip" data-placement="right"
+                                                       title="Mark Token Completed" id="token-checkbox-{{ island.id }}"
+                                                       type="checkbox" onclick="onTokenCheck({{ island.id }})">
+                                            </li>
+                                        {% else %}
+                                            <li>Has no island token</li>
+                                        {% endif %}
                                         <li id="island-contents-{{ island.id }}">
                                             {% if not island.no_content %}
                                                 Island's contents:
@@ -76,12 +99,7 @@
                                                 <i style="color: deeppink;" data-toggle="tooltip" data-placement="top"
                                                    title="Rapport Island" class="fa-solid fa-heart"></i>
                                             {% endif %}
-                                            {% if island.token %}
-                                                <img data-toggle="tooltip" data-placement="top"
-                                                     title="Island Token"
-                                                     src="{{ url_for('static', filename='images/island_token.png') }}"
-                                                     style="width: 24px; height: 24px; background: linear-gradient(to right bottom,#3b1b08,#a94204);">
-                                            {% endif %}
+
                                         </li>
                                     </ul>
                                     <div class="btn-group" role="group" aria-label="Buttons">
