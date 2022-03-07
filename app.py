@@ -22,8 +22,8 @@ islands.sort(key=lambda i: i['name'])
 
 @app.route('/')
 def index():  # put application's code here
-    global islands
-    islands = update_islands()
+    #global islands
+    #islands = update_islands()
     return render_template('index.html', islands=islands)
 
 
