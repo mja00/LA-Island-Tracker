@@ -1,0 +1,130 @@
+{% block doc -%}
+    <html {% block html_attribs %}{% endblock html_attribs %} >
+    {%- block html %}
+        <head>
+            {%- block metas %}
+                <!-- Required meta tags -->
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            {%- endblock metas %}
+
+            {%- block head %}
+                <title>{% block title %}{{ title|default }}{% endblock title %} | LAIT</title>
+               <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+                {%- block styles %}
+                    <!-- Bootstrap -->
+                    <link rel="stylesheet"
+                          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+                          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+                          crossorigin="anonymous">
+                    <link rel="stylesheet"
+                          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+                          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+                          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+                    <link rel="stylesheet"
+                          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+                          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+                          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+                {%- endblock styles %}
+            {%- endblock head %}
+        </head>
+        <body {% block body_attribs %}{% endblock body_attribs %} >
+        {% block body -%}
+            {% block navbar %}
+                <nav class="navbar navbar-expand-md navbar-light bg-light">
+                    <a class="navbar-brand" href="{{ url_for('index') }}">Lost Ark Island Tracker</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item {% if request.endpoint == 'index' %} active {% endif %}">
+                                <a class="nav-link" href="{{ url_for('index') }}">Home <span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <!-- Island Type Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Island Types
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="honing_materials") }}">Honing Material Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="adventure_island") }}">Adventure Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="pvp_enabled") }}">PvP Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="pirate_coin") }}">Pirate Coin Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="engraving_island") }}">Engraving Book Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="timed_island") }}">Timed Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="una_task") }}">Una's Task Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="rapport") }}">Rapport Islands</a>
+                                </div>
+                            </li>
+                        <li>
+                            <a class="nav-link" href="{{ url_for('static', filename='data.json') }}">Raw Data</a>
+                        </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                        </ul>
+                    </div>
+                </nav>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="container mt-4">
+                            {% for category, message in messages %}
+                                <div id="flash"
+                                     class="alert alert-{{ category }} alert-dismissible fade show text-center"
+                                     role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                {% if success %}
+                    <div class="container mt-4">
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                            Success!
+                        </div>
+                    </div>
+                {% endif %}
+            {%- endblock navbar %}
+            {% block content -%}
+            {%- endblock content %}
+            <footer class="bottom">
+                <div class="text-center">
+                    <p>Crafted by <a href="https://github.com/mja00" target="_blank">mja00</a> | If you wish to <a
+                            href="https://github.com/sponsors/mja00" target="_blank">sponsor me</a> | <a
+                            href="https://twitter.com/officialmja00" target="_blank">Twitter</a></p>
+                </div>
+            </footer>
+
+            {% block scripts %}
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+                        crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+                        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+                        crossorigin="anonymous"></script>
+                <!-- DataTables -->
+                <script type="text/javascript"
+                        src="https://cdn.datatables.net/v/bs4/dt-1.11.4/b-2.2.2/rr-1.2.8/datatables.min.js"></script>
+
+                <script>
+                    $(document).ready(function () {
+                        $('[data-toggle="tooltip"]').tooltip();
+
+                        // Hide any alerts after 5 seconds
+                        $("#flash").delay(5000).slideUp(200, function () {
+                            $(this).alert('close');
+                        });
+                    });
+                </script>
+            {%- endblock scripts %}
+            {% block userscripts -%}
+            {%- endblock userscripts %}
+        {%- endblock body %}
+        </body>
+    {%- endblock html %}
+    </html>
+{% endblock doc -%}

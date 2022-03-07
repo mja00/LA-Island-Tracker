@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="container-fluid mt-2">
+        {% for island_row in islands | batch(4, None) %}
+            <div class="row mb-2">
+                {% for island in island_row %}
+                    <div class="col">
+                        {% if island %}
+                            <div class="card border-danger" id="island-card-{{ island.id }}">
+                                <h4 class="card-header">
+                                    {{ island.name }}
+                                </h4>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        Tier {{ island.tier }} - Item Level {{ island.ilvl }}<br>
+                                        {% if island.maxroll_link and island.mokoko_count > 0 %}<a href="{{ island.maxroll_link }}#mokokos-8c643f20-12ec-4f5e-8b19-c26b12540251" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i>{% endif %}
+                                                Mokoko Seeds: {{ island.mokoko_count }}
+                                        {% if island.maxroll_link and island.mokoko_count > 0 %}</a>{% endif %}
+                                        <br>
+                                        {% if not island.no_content %}
+                                        Island's contents:
+                                        {% else %}
+                                            This island has no content.
+                                        {% endif %}
+                                        {% if island.adventure_island %}
+                                            <i style="color: orange;" data-toggle="tooltip" data-placement="top"
+                                               title="Adventure Island"
+                                               class="fa-solid fa-dungeon"></i>
+                                        {% endif %}
+                                        {% if island.pvp_enabled %}
+                                            <i style="color: darkred;" data-toggle="tooltip" data-placement="top"
+                                               title="PvP Enabled" class="fa-solid fa-shield"></i>
+                                        {% endif %}
+                                        {% if island.pirate_coin %}
+                                            <i style="color: goldenrod;" data-toggle="tooltip" data-placement="top"
+                                               title="Pirate Coins" class="fa-solid fa-coins"></i>
+                                        {% endif %}
+                                        {% if island.honing_materials %}
+                                            <i style="color: lightblue;" data-toggle="tooltip" data-placement="top"
+                                               title="Honing Materials" class="fa-solid fa-gem"></i>
+                                        {% endif %}
+                                        {% if island.engraving_island %}
+                                            <i style="color: green;" data-toggle="tooltip" data-placement="top"
+                                               title="Engravings" class="fa-solid fa-book"></i>
+                                        {% endif %}
+                                        {% if island.timed_island %}
+                                            <i style="color: purple;" data-toggle="tooltip" data-placement="top"
+                                               title="Timed Island" class="fa-solid fa-stopwatch"></i>
+                                        {% endif %}
+                                        {% if island.una_task %}
+                                            <i style="color: darkslateblue;" data-toggle="tooltip" data-placement="top"
+                                               title="Una's Tasks" class="fa-solid fa-list-check"></i>
+                                        {% endif %}
+                                        {% if island.rapport %}
+                                            <i style="color: deeppink;" data-toggle="tooltip" data-placement="top"
+                                               title="Rapport Island" class="fa-solid fa-heart"></i>
+                                        {% endif %}
+                                        <br>
+                                        <div class="btn-group" role="group" aria-label="Buttons">
+                                            {% if island.maxroll_link %}
+                                            <a class="btn btn-primary" href="{{ island.maxroll_link }}" target="_blank">
+                                                Maxroll
+                                            </a>
+                                            {% endif %}
+                                            <button id="complete-button-{{ island.id }}" class="btn btn-success" onclick="completeIsland({{ island.id }})">
+                                                Complete
+                                            </button>
+                                            <button id="interested-button-{{ island.id }}" class="btn btn-warning" onclick="interestedIsland({{ island.id }})">
+                                                Interested
+                                            </button>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block userscripts %}
+    <script>
+        function removeFromList(list, item) {
+            list = list.filter(function (value) {
+                    return value !== item;
+                });
+            return list;
+        }
+
+        function resetInterestedButton(button, hidden) {
+            button.removeClass('btn-danger');
+            button.addClass('btn-warning');
+            button.text('Interested');
+            if (hidden) {
+                button.hide();
+            }
+        }
+
+        function activateInterestedButton(button) {
+            button.removeClass('btn-warning');
+            button.addClass('btn-danger');
+            button.text('Not Interested');
+            button.show();
+        }
+
+        function resetCompletedButton(button) {
+            button.removeClass('btn-danger');
+            button.addClass('btn-success');
+            button.text('Complete');
+        }
+
+        function activateCompletedButton(button) {
+            button.removeClass('btn-success');
+            button.addClass('btn-danger');
+            button.text('Incomplete');
+        }
+
+        function completeIsland(islandId) {
+            let triggeredButton = $(`#complete-button-${islandId}`);
+            let islandCard = $(`#island-card-${islandId}`);
+            // Store a list of completed islands in the user's session/local storage
+            let completedIslands = JSON.parse(localStorage.getItem('completedIslands'));
+            if (completedIslands === null) {
+                completedIslands = [];
+            }
+            // We need our interested list too
+            let interestedIslands = JSON.parse(localStorage.getItem('interestedIslands'));
+            if (interestedIslands === null) {
+                interestedIslands = [];
+            }
+            // Check if it's already in the list
+            if (!completedIslands.includes(islandId)) {
+                completedIslands.push(islandId);
+                activateCompletedButton(triggeredButton);
+                // Check if in the interested list
+                if (interestedIslands.includes(islandId)) {
+                    islandCard.removeClass('text-white bg-warning border-warning');
+                    // Remove from interested list
+                    interestedIslands = removeFromList(interestedIslands, islandId);
+                    localStorage.setItem('interestedIslands', JSON.stringify(interestedIslands));
+                } else {
+                    islandCard.removeClass('border-danger');
+                }
+                // Hide the interested button and set text to interested
+                resetInterestedButton($(`#interested-button-${islandId}`), true);
+                islandCard.addClass('text-white bg-success border-success');
+            } else {
+                // Remove it from the list
+                completedIslands = removeFromList(completedIslands, islandId);
+                resetCompletedButton(triggeredButton);
+                islandCard.removeClass('text-white bg-success border-success');
+                islandCard.addClass('border-danger');
+                // Make sure the interested button is visible
+                $(`#interested-button-${islandId}`).show();
+            }
+            // Update the list
+            localStorage.setItem('completedIslands', JSON.stringify(completedIslands));
+        }
+
+        function interestedIsland(islandId) {
+            let triggeredButton = $(`#interested-button-${islandId}`);
+            let islandCard = $(`#island-card-${islandId}`);
+            // Store a list of interested islands in the user's session/local storage
+            let interestedIslands = JSON.parse(localStorage.getItem('interestedIslands'));
+            if (interestedIslands === null) {
+                interestedIslands = [];
+            }
+            // Check if it's already in the list
+            if (!interestedIslands.includes(islandId)) {
+                interestedIslands.push(islandId);
+                activateInterestedButton(triggeredButton);
+                islandCard.removeClass('border-danger');
+                islandCard.addClass('text-white bg-warning border-warning');
+            } else {
+                // Remove it from the list
+                interestedIslands = interestedIslands.filter(function (value) {
+                    return value !== islandId;
+                });
+                resetInterestedButton(triggeredButton, false);
+                islandCard.removeClass('text-white bg-warning border-warning');
+                islandCard.addClass('border-danger');
+            }
+            // Update the list
+            localStorage.setItem('interestedIslands', JSON.stringify(interestedIslands));
+        }
+
+        // On document ready loop get the list of completed islands and mark them as complete
+        $(document).ready(function () {
+            let completedIslands = JSON.parse(localStorage.getItem('completedIslands'));
+            let interestedIslands = JSON.parse(localStorage.getItem('interestedIslands'));
+            if (completedIslands !== null) {
+                completedIslands.forEach(function (islandId) {
+                    let islandCard = $(`#island-card-${islandId}`);
+                    let triggeredButton = $(`#complete-button-${islandId}`);
+                    let interestedButton = $(`#interested-button-${islandId}`);
+                    activateCompletedButton(triggeredButton);
+                    // Hide the interested button
+                    interestedButton.hide();
+                    islandCard.removeClass('border-danger');
+                    islandCard.addClass('text-white bg-success border-success');
+                });
+            }
+            if (interestedIslands !== null) {
+                interestedIslands.forEach(function (islandId) {
+                    let islandCard = $(`#island-card-${islandId}`);
+                    let triggeredButton = $(`#interested-button-${islandId}`);
+                    activateInterestedButton(triggeredButton);
+                    islandCard.removeClass('border-danger');
+                    islandCard.addClass('text-white bg-warning border-warning');
+                });
+            }
+        });
+    </script>
+{% endblock %}
