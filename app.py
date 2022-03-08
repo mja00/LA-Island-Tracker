@@ -1,5 +1,5 @@
-from flask import Flask, render_template, jsonify
-import json
+from flask import Flask, render_template, jsonify, send_from_directory
+import json, os
 
 app = Flask(__name__)
 
@@ -46,8 +46,8 @@ islands.sort(key=lambda i: i['name'])
 
 @app.route('/')
 def index():  # put application's code here
-    #global islands
-    #islands = update_islands()
+    # global islands
+    # islands = update_islands()
     return render_template('index.html', islands=islands, title="All Islands")
 
 
@@ -79,6 +79,11 @@ def island_ilvl(ilvl):
     except KeyError:
         island_list = []
     return render_template("index.html", islands=island_list, title=f"Ilvl {ilvl}+ Islands")
+
+
+@app.route('/browserconfig.xml')
+def browser_config():
+    return send_from_directory('static', 'favicons/browserconfig.xml')
 
 
 if __name__ == '__main__':
