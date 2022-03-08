@@ -86,5 +86,10 @@ def browser_config():
     return send_from_directory('static', 'favicons/browserconfig.xml')
 
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicons/favicon.ico')
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
