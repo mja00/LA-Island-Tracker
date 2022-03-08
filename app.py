@@ -1,7 +1,10 @@
-from flask import Flask, render_template, jsonify, send_from_directory
-import json, os
+import json
+
+from flask import Flask, render_template, send_from_directory
+from flask_sitemap import Sitemap
 
 app = Flask(__name__)
+ext = Sitemap(app=app)
 
 # Load in the data.json file
 with open('static/data.json') as data_file:
@@ -44,6 +47,7 @@ def convert_island_type_to_proper_name(island_type):
 islands.sort(key=lambda i: i['name'])
 
 
+@app.route('/islands')
 @app.route('/')
 def index():  # put application's code here
     # global islands
@@ -89,6 +93,26 @@ def browser_config():
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory('static', 'favicons/favicon.ico')
+
+
+@ext.register_generator
+def index():
+    yield 'index', {}
+
+
+@ext.register_generator
+def island_info():
+    for info, i in zip(islands[0], range(0, len(islands[0]))):
+        # Skip the first 7 fields
+        if i < 7:
+            continue
+        yield 'island_info', {'island_type': info}
+
+
+@ext.register_generator
+def island_tier():
+    for tier in range(1, 4):
+        yield 'island_tier', {'tier': tier}
 
 
 if __name__ == '__main__':
