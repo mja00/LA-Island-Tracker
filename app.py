@@ -16,6 +16,30 @@ def update_islands():
     return islands
 
 
+# Look while this is really janky, it's just okay, don't judge me
+# If I was using python3.10 then I'd just use a switch case
+# but look at me using 3.9 like a fucking loser
+def convert_island_type_to_proper_name(island_type):
+    if island_type == 'adventure_island':
+        return 'Adventure Islands'
+    elif island_type == 'pvp_enabled':
+        return 'PvP Islands'
+    elif island_type == 'pirate_coin':
+        return 'Pirate Coin Islands'
+    elif island_type == 'honing_materials':
+        return 'Honing Material Islands'
+    elif island_type == 'engraving_island':
+        return 'Engraving Book Islands'
+    elif island_type == 'timed_island':
+        return 'Timed Islands'
+    elif island_type == 'una_task':
+        return 'Una Task Islands'
+    elif island_type == 'rapport':
+        return 'Rapport Islands'
+    elif island_type == 'token':
+        return 'Islands with Tokens'
+
+
 # Sort islands by their name (ascending)
 islands.sort(key=lambda i: i['name'])
 
@@ -24,7 +48,7 @@ islands.sort(key=lambda i: i['name'])
 def index():  # put application's code here
     #global islands
     #islands = update_islands()
-    return render_template('index.html', islands=islands)
+    return render_template('index.html', islands=islands, title="All Islands")
 
 
 @app.route('/islands/<island_type>')
@@ -34,7 +58,7 @@ def island_info(island_type):
         island_list = [i for i in islands if i[island_type]]
     except KeyError:
         island_list = []
-    return render_template("index.html", islands=island_list)
+    return render_template("index.html", islands=island_list, title=convert_island_type_to_proper_name(island_type))
 
 
 @app.route('/islands/tier/<tier>')
@@ -44,7 +68,7 @@ def island_tier(tier):
         island_list = [i for i in islands if i['tier'] == int(tier)]
     except KeyError:
         island_list = []
-    return render_template("index.html", islands=island_list)
+    return render_template("index.html", islands=island_list, title=f"Tier {tier} Islands")
 
 
 @app.route('/islands/ilvl/<ilvl>')
@@ -54,7 +78,7 @@ def island_ilvl(ilvl):
         island_list = [i for i in islands if i['ilvl'] >= int(ilvl)]
     except KeyError:
         island_list = []
-    return render_template("index.html", islands=island_list)
+    return render_template("index.html", islands=island_list, title=f"Ilvl {ilvl}+ Islands")
 
 
 if __name__ == '__main__':

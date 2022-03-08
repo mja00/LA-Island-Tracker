@@ -30,7 +30,7 @@
             {%- endblock metas %}
 
             {%- block head %}
-                <title>{% block title %}{{ title|default }}{% endblock title %} | LAIT</title>
+                <title>{% block title %}{{ title|default }}{% endblock title %} | Lost Ark Island Tracker</title>
                <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
                 {%- block styles %}
@@ -62,11 +62,11 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item {% if request.endpoint == 'index' %} active {% endif %}">
-                                <a class="nav-link" href="{{ url_for('index') }}">Home <span
+                                <a class="nav-link" href="{{ url_for('index') }}">All Islands <span
                                         class="sr-only">(current)</span></a>
                             </li>
                             <!-- Island Type Dropdown -->
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown {% if request.endpoint == 'island_info' %}active{% endif %}">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Island Types
