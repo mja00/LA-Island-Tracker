@@ -103,8 +103,8 @@ def index():
 @ext.register_generator
 def island_info():
     for info, i in zip(islands[0], range(0, len(islands[0]))):
-        # Skip the first 7 fields
-        if i < 7:
+        # Skip the first 6 fields
+        if i < 6:
             continue
         yield 'island_info', {'island_type': info}
 
