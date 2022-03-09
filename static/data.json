@@ -504,6 +504,14 @@
       "ilvl": 250,
       "maxroll_link": "https://lost-ark.maxroll.gg/island/giant-mushroom-island",
       "mokoko_count": 4,
+      "trade_skils": {
+        "foraging": false,
+        "logging": true,
+        "mining": false,
+        "hunting": false,
+        "fishing": false,
+        "excavating": false
+      },
       "token": true,
       "adventure_island": false,
       "pvp_enabled": false,
@@ -513,7 +521,7 @@
       "timed_island": false,
       "una_task": false,
       "rapport": false
-    },
+    }
     {
       "id": 30,
       "name": "Glacier Island",
