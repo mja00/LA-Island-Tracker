@@ -18,6 +18,7 @@
                                 <h5 class="card-header">
                                     {{ island.name }}
                                 </h5>
+                                {% if not island.not_released %}
                                 <div class="card-body">
                                     <p class="card-text">
                                     <ul class="list-unstyled">
@@ -123,6 +124,16 @@
                                     </div>
                                     </p>
                                 </div>
+                                {% else %}
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            This island is not available yet.<br>
+                                            The island will release on {{ island.release_date }}.<br>
+                                            The website will need to be manually updated with the island's new information.<br>
+                                            This may take a few hours.
+                                        </p>
+                                    </div>
+                                {% endif %}
                             </div>
                         {% endif %}
                     </div>
