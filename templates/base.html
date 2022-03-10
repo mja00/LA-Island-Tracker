@@ -8,8 +8,10 @@
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                 <meta name="title" content="Lost Ark Island Tracker">
-                <meta name="description" content="Ever wanted to track what islands you've been to in Lost Ark? Look no further!">
-                <meta name="keywords" content="lostark, lost ark, lost ark islands, lost ark island tracker, island tracker">
+                <meta name="description"
+                      content="Ever wanted to track what islands you've been to in Lost Ark? Look no further!">
+                <meta name="keywords"
+                      content="lostark, lost ark, lost ark islands, lost ark island tracker, island tracker">
                 <meta name="robots" content="index, follow">
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
                 <meta name="language" content="English">
@@ -17,15 +19,19 @@
                 <meta property="og:type" content="website">
                 <meta property="og:url" content="https://lost-ark.theairplan.com/">
                 <meta property="og:title" content="Lost Ark Island Tracker">
-                <meta property="og:description" content="Ever wanted to track what islands you've been to in Lost Ark? Look no further!">
-                <meta property="og:image" content="{{ url_for('static', filename='images/mokoko-seed.jpg', _external=True) }}">
+                <meta property="og:description"
+                      content="Ever wanted to track what islands you've been to in Lost Ark? Look no further!">
+                <meta property="og:image"
+                      content="{{ url_for('static', filename='images/mokoko-seed.jpg', _external=True) }}">
 
                 <!-- Twitter -->
                 <meta property="twitter:card" content="summary_large_image">
                 <meta property="twitter:url" content="https://lost-ark.theairplan.com/">
                 <meta property="twitter:title" content="Lost Ark Island Tracker">
-                <meta property="twitter:description" content="Ever wanted to track what islands you've been to in Lost Ark? Look no further!">
-                <meta property="twitter:image" content="{{ url_for('static', filename='images/mokoko-seed.jpg', _external=True) }}">
+                <meta property="twitter:description"
+                      content="Ever wanted to track what islands you've been to in Lost Ark? Look no further!">
+                <meta property="twitter:image"
+                      content="{{ url_for('static', filename='images/mokoko-seed.jpg', _external=True) }}">
 
             {%- endblock metas %}
 
@@ -33,18 +39,23 @@
                 <title>{% block title %}{{ title|default }}{% endblock title %} | Lost Ark Island Tracker</title>
                 <!-- Favicons -->
 
-                <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename="favicons/apple-touch-icon.png", v=2) }}">
-                <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename="favicons/favicon-32x32.png", v=2) }}">
-                <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename="favicons/favicon-16x16.png", v=2) }}">
+                <link rel="apple-touch-icon" sizes="180x180"
+                      href="{{ url_for('static', filename="favicons/apple-touch-icon.png", v=2) }}">
+                <link rel="icon" type="image/png" sizes="32x32"
+                      href="{{ url_for('static', filename="favicons/favicon-32x32.png", v=2) }}">
+                <link rel="icon" type="image/png" sizes="16x16"
+                      href="{{ url_for('static', filename="favicons/favicon-16x16.png", v=2) }}">
                 <link rel="manifest" href="{{ url_for('static', filename="favicons/site.webmanifest", v=2) }}">
-                <link rel="mask-icon" href="{{ url_for('static', filename="favicons/safari-pinned-tab.svg", v=2) }}" color="#5bbad5">
+                <link rel="mask-icon" href="{{ url_for('static', filename="favicons/safari-pinned-tab.svg", v=2) }}"
+                      color="#5bbad5">
                 <link rel="shortcut icon" href="{{ url_for('static', filename="favicons/favicon.ico", v=2) }}">
                 <meta name="msapplication-TileColor" content="#00aba9">
                 <meta name="theme-color" content="#99d599">
 
                 {%- block styles %}
                     <!-- Bootstrap -->
-                    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css" id="bootstrap-style">
+                    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css"
+                          id="bootstrap-style">
                     <!-- Dark mode theme -->
                     <!--<link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">-->
                     <link rel="stylesheet"
@@ -59,6 +70,8 @@
                     {%- endblock userstyles %}
                 {%- endblock styles %}
             {%- endblock head %}
+            <!-- Plausible analytics -->
+            <script defer data-domain="lost-ark.theairplan.com" src="https://plausible.io/js/plausible.local.js"></script>
         </head>
         <body {% block body_attribs %}{% endblock body_attribs %} >
         {% block body -%}
@@ -81,34 +94,54 @@
                                     Island Types
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="honing_materials") }}">Honing Material Islands</a>
-                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="adventure_island") }}">Adventure Islands</a>
-                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="pvp_enabled") }}">PvP Islands</a>
-                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="pirate_coin") }}">Pirate Coin Islands</a>
-                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="engraving_island") }}">Engraving Book Islands</a>
-                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="timed_island") }}">Timed Islands</a>
-                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="una_task") }}">Una's Task Islands</a>
-                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="rapport") }}">Rapport Islands</a>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('island_info', island_type="honing_materials") }}">Honing
+                                        Material Islands</a>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('island_info', island_type="adventure_island") }}">Adventure
+                                        Islands</a>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('island_info', island_type="pvp_enabled") }}">PvP Islands</a>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('island_info', island_type="pirate_coin") }}">Pirate Coin
+                                        Islands</a>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('island_info', island_type="engraving_island") }}">Engraving
+                                        Book Islands</a>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('island_info', island_type="timed_island") }}">Timed Islands</a>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('island_info', island_type="una_task") }}">Una's Task
+                                        Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="rapport") }}">Rapport
+                                        Islands</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ url_for('island_tier', tier=1) }}">Tier 1 Islands</a>
-                                    <a class="dropdown-item" href="{{ url_for('island_tier', tier=2) }}">Tier 2 Islands</a>
-                                    <a class="dropdown-item" href="{{ url_for('island_tier', tier=3) }}">Tier 3 Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_tier', tier=1) }}">Tier 1
+                                        Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_tier', tier=2) }}">Tier 2
+                                        Islands</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_tier', tier=3) }}">Tier 3
+                                        Islands</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="token") }}">Islands with tokens</a>
+                                    <a class="dropdown-item" href="{{ url_for('island_info', island_type="token") }}">Islands
+                                        with tokens</a>
                                 </div>
                             </li>
                             <!-- Changelog modal button -->
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="modal" data-target="#changelogModal">Changelog</a>
+                                <a class="nav-link" href="#" data-toggle="modal"
+                                   data-target="#changelogModal">Changelog</a>
                             </li>
-                        <li>
-                            <a class="nav-link" href="{{ url_for('static', filename='data.json') }}">Raw Data</a>
-                        </li>
+                            <li>
+                                <a class="nav-link" href="{{ url_for('static', filename='data.json') }}">Raw Data</a>
+                            </li>
                         </ul>
                         <ul class="navbar-nav">
                             <!-- Dark mode toggle -->
-                            <button aria-label="Toggle Dark Mode" id="dark-mode-toggle" class="btn btn-outline-light" type="button"
-                                    onclick="toggleDarkMode()" data-toggle="tooltip" data-placement="left" title="Toggle light mode">
+                            <button aria-label="Toggle Dark Mode" id="dark-mode-toggle" class="btn btn-outline-light"
+                                    type="button"
+                                    onclick="toggleDarkMode()" data-toggle="tooltip" data-placement="left"
+                                    title="Toggle light mode">
                                 <i class="fas fa-sun"></i>
                             </button>
                         </ul>
@@ -145,28 +178,33 @@
                 </div>
             </footer>
             <!-- Modal -->
-            <div class="modal fade" id="changelogModal" tabindex="-1" role="dialog" aria-labelledby="changelogModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="changelogModalLabel">Changelog</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    Changes for 1.0.0 (2022-03-09):
-                      <ul>
-                          <li>Added upcoming islands, will fill with information once it becomes available.</li>
-                          <li>Started working on trade skill displays for islands.</li>
-                          <li>Added a changelog and started versioning with this version :)</li>
-                      </ul>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
+            <div class="modal fade" id="changelogModal" tabindex="-1" role="dialog"
+                 aria-labelledby="changelogModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="changelogModalLabel">Changelog</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Changes for 1.0.1 (2022-03-10):
+                            <ul>
+                                <li>Added <a href="https://plausible.io">Plausible Analytics</a>. You can view our public analytics <a href="https://plausible.io/lost-ark.theairplan.com">here</a></li>
+                            </ul>
+                            Changes for 1.0.0 (2022-03-09):
+                            <ul>
+                                <li>Added upcoming islands, will fill with information once it becomes available.</li>
+                                <li>Started working on trade skill displays for islands.</li>
+                                <li>Added a changelog and started versioning with this version :)</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
 
             {% block scripts %}
