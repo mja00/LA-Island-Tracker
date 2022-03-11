@@ -1746,9 +1746,7 @@
       "timed_island": false,
       "una_task": false,
       "rapport": false,
-      "no_content": false,
-      "not_released": true,
-      "release_date": "March 10th 2022 at 8 AM UTC"
+      "no_content": false
     },
     {
       "id": 99,
@@ -1761,14 +1759,12 @@
       "adventure_island": false,
       "pvp_enabled": false,
       "pirate_coin": false,
-      "honing_materials": false,
+      "honing_materials": true,
       "engraving_island": false,
       "timed_island": false,
       "una_task": false,
       "rapport": false,
-      "no_content": false,
-      "not_released": true,
-      "release_date": "March 10th 2022 at 8 AM UTC"
+      "no_content": false
     }
   ]
 }
