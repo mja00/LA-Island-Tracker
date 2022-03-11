@@ -217,7 +217,7 @@
                 <script>
                     const boostrapCDN = "https://bootswatch.com/4/flatly/bootstrap.min.css";
                     const darkCDN = "https://bootswatch.com/4/darkly/bootstrap.min.css";
-                    const link = document.getElementsByTagName("link")[1];
+                    const link = document.getElementById("bootstrap-style");
                     const darkmodeButton = document.getElementById("dark-mode-toggle");
 
                     // Toggle dark mode if the user has set it
@@ -254,7 +254,7 @@
 
                     function toggleDarkMode() {
                         // Get the stylesheet link element
-                        const link = document.getElementsByTagName("link")[1];
+                        const link = document.getElementById("bootstrap-style");
                         const darkmodeButton = document.getElementById("dark-mode-toggle");
                         // Get the user's preference from the local storage
                         const darkMode = localStorage.getItem("darkMode");
