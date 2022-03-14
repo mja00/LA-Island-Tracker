@@ -1735,16 +1735,16 @@
       "name": "Isteri Island",
       "tier": 3,
       "ilvl": 1100,
-      "maxroll_link": "https://lost-ark.maxroll.gg/island/isteri-island",
+      "maxroll_link": "https://lost-ark.maxroll.gg/island/isteri",
       "mokoko_count": 0,
       "token": true,
       "adventure_island": false,
       "pvp_enabled": false,
       "pirate_coin": false,
-      "honing_materials": false,
+      "honing_materials": true,
       "engraving_island": false,
       "timed_island": false,
-      "una_task": false,
+      "una_task": true,
       "rapport": false,
       "no_content": false
     },
@@ -1763,7 +1763,7 @@
       "engraving_island": false,
       "timed_island": false,
       "una_task": false,
-      "rapport": false,
+      "rapport": true,
       "no_content": false
     }
   ]
