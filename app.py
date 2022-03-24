@@ -85,6 +85,11 @@ def island_ilvl(ilvl):
     return render_template("index.html", islands=island_list, title=f"Ilvl {ilvl}+ Islands")
 
 
+@app.route('/fix-local-storage')
+def fix_local_storage():
+    return render_template('fix-local-storage.html')
+
+
 @app.route('/browserconfig.xml')
 def browser_config():
     return send_from_directory('static', 'favicons/browserconfig.xml')

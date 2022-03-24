@@ -1,11 +1,17 @@
 let completedIslands = JSON.parse(localStorage.getItem('completedIslands'));
 if (completedIslands === null) {
     completedIslands = [];
+} else {
+    // De-duplicate completed islands
+    completedIslands = completedIslands.filter((value, index, self) => self.indexOf(value) === index);
 }
 
 let interestedIslands = JSON.parse(localStorage.getItem('interestedIslands'));
 if (interestedIslands === null) {
     interestedIslands = [];
+} else {
+    // De-duplicate interested islands
+    interestedIslands = interestedIslands.filter((value, index, self) => self.indexOf(value) === index);
 }
 let questCompleted = JSON.parse(localStorage.getItem('questCompleted'));
 if (questCompleted === null) {
@@ -91,7 +97,10 @@ function getNeededElements(islandId) {
 
 function makeIslandCardCompleted(islandId) {
     const [islandCard, mokokoLink, questLink, triggeredButton, interestedButton, tokenLink] = getNeededElements(islandId);
-    completedIslands.push(islandId);
+    // Check if island is already completed, if so, don't push to completed list but still make it completed
+    if (!completedIslands.includes(islandId)) {
+        completedIslands.push(islandId);
+    }
     activateCompletedButton(triggeredButton);
     makeLinksWhite([mokokoLink, questLink, tokenLink]);
     // Hide the interested button
@@ -134,7 +143,10 @@ function completeIsland(islandId) {
 
 function makeIslandCardInterested(islandId) {
     const [islandCard, mokokoLink, questLink, triggeredButton, interestedButton, tokenLink] = getNeededElements(islandId);
-    interestedIslands.push(islandId);
+    // Check if island is already interested, if so, don't push to interested list but still make it interested
+    if (!interestedIslands.includes(islandId)) {
+        interestedIslands.push(islandId);
+    }
     activateInterestedButton(interestedButton);
     makeLinksWhite([mokokoLink, questLink, tokenLink]);
     islandCard.removeClass('border-danger');
@@ -262,11 +274,13 @@ function onTokenCheck(islandId) {
 
 // On document ready loop get the list of completed islands and mark them as complete
 $(document).ready(function () {
+    // Marks the island as completed if it's in the list
     if (completedIslands !== null) {
         completedIslands.forEach(function (islandId) {
             makeIslandCardCompleted(islandId);
         });
     }
+    // Marks the quest as completed if it's in the list
     if (interestedIslands !== null) {
         interestedIslands.forEach(function (islandId) {
             makeIslandCardInterested(islandId);

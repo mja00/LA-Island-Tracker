@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Fixing Local Storage</title>
+    </head>
+    <body>
+        <h1 id="message">One second, we're de-duplicating your completed islands and interested island lists</h1>
+    </body>
+    <script>
+        // Get the list of completed islands and interested islands from local storage
+        let completedIslands = JSON.parse(localStorage.getItem('completedIslands'));
+        let interestedIslands = JSON.parse(localStorage.getItem('interestedIslands'));
+
+        // Remove duplicates from the completed islands
+        if (completedIslands !== null ) {
+            console.log('Removing duplicates from completed islands');
+            completedIslands = completedIslands.filter((value, index, self) => self.indexOf(value) === index);
+            localStorage.setItem('completedIslands', JSON.stringify(completedIslands));
+        } else {
+            console.log('No completed islands to remove duplicates from');
+        }
+
+        // Remove duplicates from the interested islands
+        if (interestedIslands !== null ) {
+            console.log('Removing duplicates from interested islands');
+            interestedIslands = interestedIslands.filter((value, index, self) => self.indexOf(value) === index);
+            localStorage.setItem('interestedIslands', JSON.stringify(interestedIslands));
+        } else {
+            console.log('No interested islands to remove duplicates from');
+        }
+
+        // Update the message
+        document.getElementById('message').innerHTML = 'Local storage has been de-duplicated. You may return to the <a href="{{ url_for('index') }}">home page</a>.';
+    </script>
+</html>
